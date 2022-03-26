@@ -40,6 +40,10 @@ INSTALLED_APPS = [
 
     # My apps
     'todo',
+
+    # Third party apps
+    'corsheaders', # adds Cross-Origin Resource Sharing (CORS) headers to responses. Allows in-browser requests to your Django application from other origins. 
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +54,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Third party
+    'corsheaders.middleware.CorsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -124,3 +132,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CORS_ORIGIN_WHITELIST = [
+     'http://localhost:3000'
+]

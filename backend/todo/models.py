@@ -8,3 +8,4 @@ class Todo(models.Model):
 
     def _str_(self):
         return self.title
+        # The __str__ method tells Django what to print when it needs to print out an instance of the any model
