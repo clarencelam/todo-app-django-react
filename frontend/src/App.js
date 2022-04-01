@@ -54,9 +54,9 @@ class App extends Component {
   // Function to update Todo list to the most recent list. Use after API request is complete
   refreshList = () => {
     axios
-    .get("api/todos/")
-    .then((res) => this.setState({ todoList: res.data }))
-    .catch((err) => console.log(err));
+      .get("api/todos/")
+      .then((res) => this.setState({ todoList: res.data }))
+      .catch((err) => console.log(err));
   };
 
   // Functions to enable modal functionality
@@ -81,7 +81,7 @@ class App extends Component {
   };
 
   handleDelete = (item) => {
-    axios 
+    axios
       .delete(`/api/todos/${item.id}`)
       .then((res) => this.refreshList());
   };
@@ -105,21 +105,35 @@ class App extends Component {
     return this.setState({ viewCompleted: false });
   };
 
+  // Code to render the to-do category tabs, showing the "To Do" or "Complete" tabs for selection
   renderTabList = () => {
     return (
-      <div className="nav nav-tabs">
-        <span 
-          className={this.state.viewCompleted ? "nav-link active" : "nav-link"}
-          onClick={() => this.displayCompleted(true)}
-          >
-            Complete
-          </span>
-          <span 
-          className={this.state.viewCompleted ? "nav-link" : "nav-link active"}
-          onClick={() => this.displayCompleted(false)}
-          >
-            Incomplete
-          </span>
+      <div className="mb-4">
+      <button className="btn btn-primary"
+          onClick={this.createItem}
+        >
+          Add task
+        </button>
+
+        {/* <button
+          className=
+          {this.state.viewCompleted ? "btn btn-secondary mx-3" : "btn btn-primary mx-3"}
+          onClick=
+          {() => this.displayCompleted(false)}
+        >
+          To Do
+        </button> */}
+        <button
+          className=
+          {this.state.viewCompleted ? "btn btn-outline-secondary mx-3" : "btn btn-primary mx-3"}
+          onClick=
+          {this.state.viewCompleted ?
+            () => this.displayCompleted(false) : () => this.displayCompleted(true)
+          } 
+        >
+          View Completed Tasks
+        </button>
+
       </div>
     );
   };
@@ -131,32 +145,31 @@ class App extends Component {
     );
 
     return newItems.map((item) => (
-      <li 
-      key={item.id}
-      className="list-group-item d-flex justify-content-between align-items-center"
+      <li
+        key={item.id}
+        className="list-group-item d-flex justify-content-between align-items-center"
       >
-        <span 
-        className={`todo-title mr-2 ${
-          this.state.viewCompleted ? "completed-todo" : ""
-        }`}
-        title={item.description}
+        <span
+          className={`todo-title mr-2 ${this.state.viewCompleted ? "completed-todo" : ""
+            }`}
+          title={item.description}
         >
           {item.title}
         </span>
         <span>
           <button className="btn btn-secondary mr-2"
-          onClick={() => this.editItem(item)}
+            onClick={() => this.editItem(item)}
           >
             Edit
           </button>
           <button className="btn btn-danger"
-          onClick={() => this.handleDelete(item)}
+            onClick={() => this.handleDelete(item)}
           >
             Delete
           </button>
         </span>
       </li>
-      ));
+    ));
   };
 
   render() {
@@ -166,28 +179,30 @@ class App extends Component {
         <div className="row">
           <div className="col-md-6 col-sm-10 mx-auto p-0">
             <div className="card p-3">
-              <div className="mb-4">
+
+              {/* <div className="mb-4">
                 <button className="btn btn-primary"
-                onClick={this.createItem}
+                  onClick={this.createItem}
                 >
                   Add task
                 </button>
-                </div>
-                {this.renderTabList()}
-                <ul className="list-group list-group-flush border-top-0">
-                  {this.renderItems()}
-                </ul>
+              </div> */}
+
+              {this.renderTabList()}
+              <ul className="list-group list-group-flush border-top-0">
+                {this.renderItems()}
+              </ul>
             </div>
           </div>
         </div>
         {this.state.modal ? (
-          <Modal 
-          activeItem={this.state.activeItem}
-          toggle={this.toggle}
-          onSave={this.handleSubmit}
+          <Modal
+            activeItem={this.state.activeItem}
+            toggle={this.toggle}
+            onSave={this.handleSubmit}
           />
         ) : null}
-      </main> 
+      </main>
     );
   }
 }
