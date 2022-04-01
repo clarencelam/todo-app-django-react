@@ -115,23 +115,15 @@ class App extends Component {
           Add task
         </button>
 
-        {/* <button
-          className=
-          {this.state.viewCompleted ? "btn btn-secondary mx-3" : "btn btn-primary mx-3"}
-          onClick=
-          {() => this.displayCompleted(false)}
-        >
-          To Do
-        </button> */}
         <button
           className=
-          {this.state.viewCompleted ? "btn btn-outline-secondary mx-3" : "btn btn-primary mx-3"}
+          {this.state.viewCompleted ? "btn btn-outline-secondary mx-3" : "btn btn-outline-secondary mx-3"}
           onClick=
           {this.state.viewCompleted ?
             () => this.displayCompleted(false) : () => this.displayCompleted(true)
           } 
         >
-          View Completed Tasks
+          {this.state.viewCompleted ? "View Current Tasks" : "View Archived Tasks"}
         </button>
 
       </div>
