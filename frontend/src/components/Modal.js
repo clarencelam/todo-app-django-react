@@ -74,6 +74,17 @@ export default class CustomModal extends Component {
                                 Completed
                             </Label>
                         </FormGroup>
+                        <FormGroup check>
+                            <Label check>
+                                <Input
+                                    type="checkbox"
+                                    name="done"
+                                    checked={this.state.activeItem.done}
+                                    onChange={this.handleChange}
+                                />
+                                Done?
+                            </Label>
+                        </FormGroup>
                     </Form>
                 </ModalBody>
 

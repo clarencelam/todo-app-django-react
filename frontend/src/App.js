@@ -15,6 +15,7 @@ class App extends Component {
         title: "",
         description: "",
         completed: false,
+        done: false,
       },
     };
   }
@@ -59,7 +60,7 @@ class App extends Component {
   };
 
   createItem = () => {
-    const item = { title: "", description: "", completed: false };
+    const item = { title: "", description: "", completed: false, done: false };
 
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
@@ -103,10 +104,10 @@ class App extends Component {
   };
 
   renderItems = () => {
-    const { viewCompleted } = this.state;
+    const { viewCompleted } = this.state; // viewCompleted will = true or false
     const newItems = this.state.todoList.filter(
       (item) => item.completed === viewCompleted
-    );
+    ); // newItems = todo items where 'completed = true' or 'completed = false'
 
     return newItems.map((item) => (
       <li
@@ -136,6 +137,43 @@ class App extends Component {
     ));
   };
 
+  renderDoneOnly = () => {
+    const allItems = this.state.todoList
+    const notDoneItems = this.state.todoList.filter(
+      (item) => item.done === true
+    )
+
+
+    return notDoneItems.map(filtereditem => (
+      <li
+        key={filtereditem.id}
+        className="list-group-item d-flex justify-content-between align-items-center"
+      >
+        <span
+          className={`todo-title mr-2 ${this.state.viewCompleted ? "completed-todo" : ""
+            }`}
+          title={filtereditem.description}
+        >
+          {filtereditem.title}
+        </span>
+        <span>
+          <button className="btn btn-secondary mr-2"
+            onClick={() => this.editItem(filtereditem)}
+          >
+            Edit
+          </button>
+          <button className="btn btn-danger"
+            onClick={() => this.handleDelete(filtereditem)}
+          >
+            Delete
+          </button>
+        </span>
+
+      </li>
+    ))
+  }
+
+
   render() {
     return (
       <main className="container">
@@ -154,7 +192,7 @@ class App extends Component {
 
               {this.renderTabList()}
               <ul className="list-group list-group-flush border-top-0">
-                {this.renderItems()}
+                {this.renderDoneOnly()}
               </ul>
             </div>
           </div>
