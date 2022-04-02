@@ -2,34 +2,6 @@ import React, { Component } from "react";
 import Modal from "./components/Modal";
 import axios from "axios";
 
-// Sample todo items
-
-// const todoItems = [
-//   {
-//     id: 1,
-//     title: "Go to Market",
-//     description: "Buy ingredients to prepare dinner",
-//     completed: true,
-//   },
-//   {
-//     id: 2,
-//     title: "Study",
-//     description: "Do history readings and history assignment",
-//     completed: false,
-//   },
-//   {
-//     id: 3,
-//     title: "Sammy's books",
-//     description: "Go to library to return Sammy's books",
-//     completed: true,
-//   },
-//   {
-//     id: 4,
-//     title: "Article",
-//     description: "Write article on how to use Django with React",
-//     completed: false,
-//   },
-// ];
 
 class App extends Component {
   constructor(props) {
