@@ -106,8 +106,10 @@ class App extends Component {
   renderItems = () => {
     const { viewCompleted } = this.state; // viewCompleted will = true or false
     const newItems = this.state.todoList.filter(
-      (item) => item.completed === viewCompleted
-    ); // newItems = todo items where 'completed = true' or 'completed = false'
+      (item) => (item.completed === viewCompleted && item.done === false)
+    ); 
+    // newItems = todo items where 'completed = true' or 'completed = false' depending on the current state
+    // AND 'item.done === false'
 
     return newItems.map((item) => (
       <li
@@ -154,7 +156,7 @@ class App extends Component {
             }`}
           title={filtereditem.description}
         >
-          {filtereditem.title}
+          <del>{filtereditem.title}</del>
         </span>
         <span>
           <button className="btn btn-secondary mr-2"
@@ -192,6 +194,7 @@ class App extends Component {
 
               {this.renderTabList()}
               <ul className="list-group list-group-flush border-top-0">
+                {this.renderItems()}
                 {this.renderDoneOnly()}
               </ul>
             </div>
