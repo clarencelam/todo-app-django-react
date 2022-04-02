@@ -140,9 +140,11 @@ class App extends Component {
   };
 
   renderDoneOnly = () => {
-    const allItems = this.state.todoList
+    const { viewCompleted } = this.state;
+    // need to surface items which are Done, and also surface tasks
+    // according to their Completed status ()
     const notDoneItems = this.state.todoList.filter(
-      (item) => item.done === true
+      (item) => (item.completed === viewCompleted && item.done === true)
     )
 
 
@@ -167,7 +169,7 @@ class App extends Component {
           <button className="btn btn-danger"
             onClick={() => this.handleDelete(filtereditem)}
           >
-            Delete
+            Archive
           </button>
         </span>
 
